@@ -1,0 +1,14 @@
+{
+  "name": "model-aggregator",
+  "version": "1.0.0",
+  "description": "A simple tool to standardize and combine sports betting models in order to identify value picks",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "wagerlab",
+  "license": "ISC",
+  "dependencies": {
+    "csv-parser": "^2.3.2"
+  }
+}
