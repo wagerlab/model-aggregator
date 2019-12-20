@@ -7,10 +7,10 @@ Feel free to use, copy, and modify this code as much as you'd like.  If you have
 
 <br>
 
-This model was built by the developer of WagerLab, a mobile app for betting on sports and current events with your friends. Please consider giving the app a download (and a nice review:pray:). It would mean a lot to me! :grimacing:
+This model was built by the developer of WagerLab, a mobile app for betting on sports and current events with your friends. Please consider giving the app a download (and a nice review:pray:). It would really mean a lot to me! :grimacing:
 
-[<img src="https://firebasestorage.googleapis.com/v0/b/socialbetproduction.appspot.com/o/wagerlab-logo-text-blue.png?alt=media&token=a05fe60e-97ea-4b42-af90-bbaeed9ae3be">](https://www.wagerlab.app/)&nbsp;&nbsp;&nbsp;&nbsp;
-[<img src="https://firebasestorage.googleapis.com/v0/b/socialbetproduction.appspot.com/o/a-store-2.png?alt=media&token=ffa151ab-139e-4dce-9837-0df7942d1369">](https://apps.apple.com/us/app/wagerlab/id1460332027) &nbsp;&nbsp;&nbsp;&nbsp;[<img src="https://firebasestorage.googleapis.com/v0/b/socialbetproduction.appspot.com/o/g-play-2.png?alt=media&token=35c7c808-5340-4d07-b280-9003e5d3260f">](https://play.google.com/store/apps/details?id=com.socialbet.android)
+[<img src="https://firebasestorage.googleapis.com/v0/b/socialbetproduction.appspot.com/o/wagerlab-purple-logo-text-small.png?alt=media&token=454a81be-747b-4dfc-94bb-9eb82afd4dda">](https://www.wagerlab.app/)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[<img src="https://firebasestorage.googleapis.com/v0/b/socialbetproduction.appspot.com/o/a-store-2.png?alt=media&token=ffa151ab-139e-4dce-9837-0df7942d1369">](https://apps.apple.com/us/app/wagerlab/id1460332027) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<img src="https://firebasestorage.googleapis.com/v0/b/socialbetproduction.appspot.com/o/g-play-2.png?alt=media&token=35c7c808-5340-4d07-b280-9003e5d3260f">](https://play.google.com/store/apps/details?id=com.socialbet.android)
 
 ## Methodology
 ### Theory
