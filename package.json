@@ -4,11 +4,18 @@
   "description": "A simple tool to standardize and combine sports betting models in order to identify value picks",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "ncaaf": "./generatePicks.js ncaapredictions",
+    "nfl": "./generatePicks.js nflpredictions",
+    "nfl-totals": "./generatePicks.js nfltotals",
+    "ncaab": "./generatePicks.js ncaabbpreds",
+    "nba": "./generatePicks.js nbapreds"
   },
   "author": "wagerlab",
   "license": "ISC",
   "dependencies": {
-    "csv-parser": "^2.3.2"
+    "csv-parser": "^2.3.2",
+    "mathjs": "^6.2.5",
+    "request": "^2.88.0"
   }
 }
