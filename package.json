@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "ncaaf": "./generatePicks.js ncaapredictions",
-    "nfl": "./generatePicks.js nflpredictions",
-    "nfl-totals": "./generatePicks.js nfltotals",
-    "ncaab": "./generatePicks.js ncaabbpreds",
-    "nba": "./generatePicks.js nbapreds"
+    "ncaaf": "node generatePicks.js ncaapredictions",
+    "nfl": "node generatePicks.js nflpredictions",
+    "nfl-totals": "node generatePicks.js nfltotals",
+    "ncaab": "node generatePicks.js ncaabbpreds",
+    "nba": "node generatePicks.js nbapreds"
   },
   "author": "wagerlab",
   "license": "ISC",

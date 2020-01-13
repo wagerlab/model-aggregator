@@ -48,3 +48,7 @@ Feel free to copy this for your own purposes or contribute. If you have question
    - Set read/write permissions on main script by running `sudo chmod -R 777 generatePicks.js`
 3. **Run the model**
    - See the 'Commands' section above for the specific commands to run depending on which data you want to view.
+
+
+## Consideration
+Without ThePredictionTracker.com, building this would be considerably more complicated. We rely on them heavily for data.  A big thanks to them!

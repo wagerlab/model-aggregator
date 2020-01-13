@@ -1,5 +1,22 @@
 #!/usr/bin/env node
-//run this directly with ./generatePicks.js
+//run this directly with './generatePicks.js' or 'node generatePicks.js'
+
+
+//  ---  CONFIGURATIONS  ---
+
+//BLACK_LIST_MODELS - Models you don't like/trust and want to exclude from the calculations
+const BLACK_LIST_MODELS = [];
+
+//THESE_ARE_NOT_MODELS - The fields from ThePredictionTracker to ignore because they are not actual models
+const THESE_ARE_NOT_MODELS = ["home" , "road" , "line" , "neutral", "linemidweek", "phcover", "phwin", "lineca", "lineopen", "homeTeam", "awayTeam", "actualLine"].concat(BLACK_LIST_MODELS)
+
+//ENABLE_WHITE_LIST - Enable a whitelist. Only models listed on the whitelist will be used for the calculation
+const ENABLE_WHITE_LIST = false;
+//WHITE_LIST_MODELS - The list of models to use when the ENABLE_WHITE_LIST configuration is set to true.
+const WHITE_LIST_MODELS = ["linesagr", "linepaynep", "lineloud", "linecurry", "linepig", "linepiratings", "lineca", "linekeep", "linesagr", "linel2"];
+
+// --- --- ---
+
 
 //Import dependencies
 const csv = require('csv-parser')
@@ -8,9 +25,6 @@ const { std, mean, abs, sqrt } = require('mathjs')
 const request = require('request');
 const { getZPercent } = require('./getZPercent');
 
-//CONFIGURATIONS
-//theseAreNotModels - The fields from ThePredictionTracker to ignore because they are not actual models
-const theseAreNotModels = ["home" , "road" , "line" , "neutral", "linemidweek", "phcover", "phwin", "lineca", "lineopen", "homeTeam", "awayTeam", "actualLine"]
 
 //Parse input parameter to determine the sport we are assessing
 var myArgs = process.argv.slice(2);
@@ -30,7 +44,7 @@ if(myArgs[0]) {
   .on('end', () => {
 
   	let numGames = inputArray.length;
-  	console.log(`Analyzing ${numGames.toString()} games...`);
+  	console.log(`\nAnalyzing ${numGames.toString()} games...\n\n\n`);
 
     inputArray.forEach((game) => {
     	if(!game.home || !game.road || !game.line || isNaN(game.line)) {
@@ -42,9 +56,13 @@ if(myArgs[0]) {
     	let allGamesEntry = { homeTeam: game.home, awayTeam: game.road, actualLine: actualLine };
     	Object.entries(game).forEach(([key, value]) => {
 
-    		if(!key || theseAreNotModels.includes(key) || value == null || value === "" || isNaN(value) ) {
+    		if(!key || THESE_ARE_NOT_MODELS.includes(key) || value == null || value === "" || isNaN(value) ) {
     			return;
     		}
+
+            if(ENABLE_WHITE_LIST && !WHITE_LIST_MODELS.includes(key)) {
+                return;
+            }
 
     		let modelLineNum = parseFloat(value);
     		let modelLineDiff = modelLineNum - actualLine;
@@ -64,9 +82,12 @@ if(myArgs[0]) {
     allGames.forEach((game) => {
     	Object.entries(game).forEach(([key, value]) => {
 
-    		if(!key || theseAreNotModels.includes(key) || value == null || value === "" || isNaN(value) ) {
+    		if(!key || THESE_ARE_NOT_MODELS.includes(key) || value == null || value === "" || isNaN(value) ) {
     			return;
     		}
+            if(ENABLE_WHITE_LIST && !WHITE_LIST_MODELS.includes(key)) {
+                return;
+            }
 
     		let modelLineDiff = value;
     		let allPredictionsForThisModel = allModelDiffs[key];
@@ -91,7 +112,26 @@ if(myArgs[0]) {
     allGames.sort((a, b) => {
     	return abs(b.avgZScore) - abs(a.avgZScore);
     });
-    
+
+    allGames.slice(0,3).forEach((pick, index) => {
+        let confidenceNum = getZPercent(abs(pick.avgZScore));
+        let confidenceString = parseFloat(confidenceNum).toFixed(2)
+
+        let pickTeam = pick.avgZScore >= 0 ? pick.homeTeam : pick.awayTeam;
+        let pickOpponent = pick.avgZScore >= 0 ? pick.awayTeam : pick.homeTeam;
+        let pickSpread = pick.avgZScore >= 0 ? -1 * pick.actualLine : pick.actualLine;
+        let pickSpreadString = (pickSpread < 0 ? "" : "+" ) + pickSpread.toString();
+
+        if(index == 0) {
+            console.log("Top Picks:");
+        }
+        if (confidenceNum > 75) {
+            console.log(`\x1b[1m${pickTeam} ${pickSpreadString}\x1b[22m\t\t(vs: ${pickOpponent}, confidence score: ${confidenceString})`);
+        }
+    });
+
+    console.log("\n");
+
     allGames.forEach((pick, index) => {
     	let confidenceNum = getZPercent(abs(pick.avgZScore));
     	let confidenceString = parseFloat(confidenceNum).toFixed(2)
@@ -100,8 +140,10 @@ if(myArgs[0]) {
     	let pickOpponent = pick.avgZScore >= 0 ? pick.awayTeam : pick.homeTeam;
     	let pickSpread = pick.avgZScore >= 0 ? -1 * pick.actualLine : pick.actualLine;
     	let pickSpreadString = (pickSpread < 0 ? "" : "+" ) + pickSpread.toString();
-
-    	console.log(`${index+1}) ${pickTeam} ${pickSpreadString} (vs. ${pickOpponent}) (Confidence: ${confidenceString})`);
+        if(index == 0) {
+            console.log("All Picks:");
+        }
+    	console.log(`\x1b[1m${pickTeam} ${pickSpreadString}\x1b[22m\t\t(vs: ${pickOpponent}, confidence score: ${confidenceString})`);
     });
 
   });
